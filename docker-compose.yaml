@@ -1,0 +1,15 @@
+version: '3'
+services:
+  mainapp:
+    image: k8s-condition-demo-mainapp:latest
+    build:
+      context: mainapp
+    ports:
+      - 8080:80
+
+  setupwizard:
+    image: k8s-condition-demo-setupwizard:latest
+    build:
+      context: setupwizard
+    ports:
+      - 8081:80

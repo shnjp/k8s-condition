@@ -28,6 +28,7 @@ metadata:
     app: mainapp
 spec:
   replicas: 0
+  revisionHistoryLimit: 3
   selector:
     matchLabels:
       app: mainapp
@@ -41,7 +42,7 @@ spec:
         image: k8s-condition-demo-mainapp:latest
         imagePullPolicy: IfNotPresent
         ports:
-        - containerPort: 8001
+        - containerPort: 8000
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -52,6 +53,7 @@ metadata:
     app: setupwizard
 spec:
   replicas: 1
+  revisionHistoryLimit: 3
   selector:
     matchLabels:
       app: setupwizard

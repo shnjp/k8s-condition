@@ -13,5 +13,5 @@ RUN \
 
 COPY mainapp ./mainapp
 
-EXPOSE 8001
+EXPOSE 8000
 CMD ["python", "-m", "mainapp"]

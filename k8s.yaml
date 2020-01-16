@@ -1,0 +1,68 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: k8s-condition
+  labels:
+    name: k8s-condition
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: condition-test
+  namespace: k8s-condition
+spec:
+  selector:
+    app: setupwizard
+  ports:
+  - protocol: TCP
+    port: 9999
+    targetPort: 8000
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mainapp
+  namespace: k8s-condition
+  labels:
+    app: mainapp
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: mainapp
+  template:
+    metadata:
+      labels:
+        app: mainapp
+    spec:
+      containers:
+      - name: mainapp
+        image: k8s-condition-demo-mainapp:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8001
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: setupwizard
+  namespace: k8s-condition
+  labels:
+    app: setupwizard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: setupwizard
+  template:
+    metadata:
+      labels:
+        app: setupwizard
+    spec:
+      containers:
+      - name: setupwizard
+        image: k8s-condition-demo-setupwizard:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000

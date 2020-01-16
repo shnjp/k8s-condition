@@ -5,11 +5,11 @@ services:
     build:
       context: mainapp
     ports:
-      - 8080:80
+      - 8001:8001
 
   setupwizard:
     image: k8s-condition-demo-setupwizard:latest
     build:
       context: setupwizard
     ports:
-      - 8081:80
+      - 8000:8000
